@@ -1,22 +1,17 @@
-package com.spring.calculator;
+package com.spring.calculator.controller;
 
+import com.spring.calculator.model.Number;
 import jakarta.validation.Valid;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 //Web controller, leidžia naudoti @RequestMapping
@@ -83,9 +78,6 @@ public class CalculatorController {
                     result = sk1 + sk2;
                     break;
             }
-
-            //TODO suskaičiuoti ir atspausdinti rezultata, kas iš ko
-            // int result = sk1 * sk2 ;
             //inputForm naudojamas siųsi duomenis iš spring MVC controller į JSP failą (vaizdą)
             outputForm.put("sk1", sk1);
             outputForm.put("sk2", sk2);
@@ -93,10 +85,6 @@ public class CalculatorController {
             outputForm.put("result", result);
             return "calculate";
         }
-
-
-
-
         //grąžinamas vaizdas (forma .jsp)
         //svarbu nurodyti per application.properties prefix ir suffix nes pagal tai ieškos vaizdo projekte
        // return "calculate";
@@ -128,46 +116,9 @@ public class CalculatorController {
     }
 
 
-    @RequestMapping("/dalinti")
-    public String dalint() {
-        double dalyba = 8 / 3;
-
-        return "Dalyba 8/3 = " + dalyba;
-    }
 
 
-    @GetMapping("/list")
-    public List<Student> all() {
-        List<Student> students = new ArrayList<>();
 
-        Student st1 = new Student(10, "Virgis", "Saule", 15);
-        Student st2 = new Student(11, "Tadas", "Morkauskas", 20);
-
-        students.add(new Student(12, "Karolis", "Kirvis", 20));
-
-        students.add(st1);
-        students.add(st2);
-
-        return students;
-    }
-
-    @GetMapping("/list/{name}/{lastName}")
-    public Student path(@PathVariable String name,
-                        @PathVariable String lastName) {
-        Student student = new Student();
-        //int id = student.getId();
-        // int age = student.getAge();
-
-        return new Student(name, lastName);
-
-    }
-
-    @GetMapping("/list/query")
-    public Student studentQuery(@RequestParam(name = "name") String name,
-                                @RequestParam(name = "lastName") String lastName) {
-
-        return new Student(name, lastName);
-    }
 
 
 }

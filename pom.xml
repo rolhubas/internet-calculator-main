@@ -44,6 +44,18 @@
             <version>8.0.0.Final</version>
 
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.13</version>
+        </dependency>
+        <dependency>
+            <!--04.24  Reikalingas ORM: leidzia sujunkti Klase su duomenu lentele pvz sk1 sujungti
+             su DB objektas ikeliam failiuka persistence.xml-->
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.3.7.Final</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
