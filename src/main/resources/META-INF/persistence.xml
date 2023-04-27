@@ -19,7 +19,8 @@
             <property name="javax.persistence.jdbc.password" value=""/>
             <property name="hibernate.show_sql" value="true"/><!--04.26 terinale rodo sql uzklausas-->
             <!--tells hibernate to update the database schema each time the session factory is created. -->
-            <property name="hibernate.hbm2ddl.auto" value="create"/> <!--04.26 pagal @Entity sukuria DB laukelius-->
+            <property name="hibernate.hbm2ddl.auto" value="update"/> <!--04.26 pagal @Entity sukuria "create" DB laukelius-->
+            <!--04.26 SVARBU paleidus pirma karta "create" jei viskas gerai, pakeisti create i update -->
         </properties>
     </persistence-unit>
 </persistence>

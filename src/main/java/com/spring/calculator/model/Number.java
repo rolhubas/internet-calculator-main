@@ -25,11 +25,20 @@ public class Number {
     @Column(name = "action")
     private  String action;
     @Column(name = "result")
-    private  int result;
+    private  double result;
 
-
-    public Number(int id, int sk1, int sk2, String action, int result) {
+// esamu duomenu bazeje irasu paieskai, redagavimui, trinimui
+    public Number(int id, int sk1, int sk2, String action, double result) {
         this.id = id;
+        this.sk1 = sk1;
+        this.sk2 = sk2;
+        this.action = action;
+        this.result = result;
+    }
+
+    // naujai DB kurimui
+
+    public Number(int sk1, int sk2, String action, double result) {
         this.sk1 = sk1;
         this.sk2 = sk2;
         this.action = action;
@@ -64,11 +73,11 @@ public class Number {
         this.action = action;
     }
 
-    public int getResult() {
+    public double getResult() {
         return result;
     }
 
-    public void setResult(int result) {
+    public void setResult(double result) {
         this.result = result;
     }
 

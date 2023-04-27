@@ -19,9 +19,9 @@ public class JPAUtil {
     // kad būtų sukurtas ir sukonfigūruotas EntityManagerFactory objektas.
 
     /**
-     * uztikrina kad bus vienas
+     * uztikrina kad bus vienas, singlton kodas
      * jei tuscia sukuria
-     * @return kitu atveju grazina uzpildyta
+     * @return kitu atveju grazina esama
      */
     public static EntityManagerFactory getEntityManagerFactory(){
         if (entityManagerFactory == null){
