@@ -76,6 +76,14 @@
             <version>2.3.2</version>
         </dependency>
 
+        <!-- JSP (vaizdo failiukai) jstl anotacijoms www.baeldung.com/jstl  pvz,: foreach, if,  url, param -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+
+        </dependency>
+
 
     </dependencies>
 

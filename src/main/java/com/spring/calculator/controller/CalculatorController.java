@@ -59,7 +59,7 @@ public class CalculatorController {
         //simboliai koduojasi https://meyerweb.com/eric/tools/dencoder/
 
         // jeigu validacijos klaidos (ziureti Number klaseje aprasyta validacija prie kiekvieno skaiciaus)
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             // vartotojas lieka skaiciuotuvo lange tol kol neistaiso validacijos klaidu
             return "calculator";
         } else {
@@ -74,7 +74,7 @@ public class CalculatorController {
                     result = sk1 * sk2;
                     break;
                 case "/":
-                    if (sk1 != 0) {
+                    if (sk2 != 0) {
                         result = (double) sk1 / sk2;
 
                     } else {
@@ -95,14 +95,14 @@ public class CalculatorController {
             outputForm.put("result", result);
 
             // 04.27 kreipiames i Service kuris savo ruostu kreipiasi i DAO ir issaugo savo irasa DB
-            numberService.insert(new Number(sk1,sk2,action,result));
+            numberService.insert(new Number(sk1, sk2, action, result));
 
 
             return "calculate";
         }
         //grąžinamas vaizdas (forma .jsp)
         //svarbu nurodyti per application.properties prefix ir suffix nes pagal tai ieškos vaizdo projekte
-       // return "calculate";
+        // return "calculate";
         // ApplicationContext yra interface skirtassuteikti informaciją apie aplikacijos konfigūraciją.
         //Šiuo atveju naudojama konfigūracija paimam iš xml failo
         //  ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
@@ -130,10 +130,44 @@ public class CalculatorController {
         return "calculator";
     }
 
+    //04.27 gausim visa lentele
+    @RequestMapping(method = RequestMethod.GET, value = "/numbers")
+    public String getAllNumbers(Model model) {
+        model.addAttribute("numbers", numberService.getall());
+        return "numbers";
 
+    }
 
+    //04.27 id gaunamas is frontendo vartotojui pasirinkus konkretu irasa
+    @RequestMapping(method = RequestMethod.GET, value = "/show{id}")
+    public String getById(@RequestParam("id") int id, Model model) {
+        model.addAttribute("number", numberService.getById(id));
+        return "number";
+    }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete{id}")
+    public String deleteById(@RequestParam("id") int id, Model model) {
+        numberService.delete(id);
+        model.addAttribute("numbers", numberService.getall());
+        return "numbers";
+    }
 
+    // 04.27 atnaujinant irasa pirmiausia reikia ji parodyti i atskira forma tada gales tik redaguoti, sukuriam  "/updateNumber"
+    @RequestMapping(method = RequestMethod.GET, value = "/update{id}")
+    public String updateById(@RequestParam("id") int id, Model model) {
+        numberService.delete(id);
+        model.addAttribute("number", numberService.getById(id));
+        return "update";
+    }
+
+    // 04.27 kadangi forma naudoja metoda POST, cia irgi nurodome POST
+    @RequestMapping(method = RequestMethod.POST, value = "/updateNumber")
+    public String updateNumber(@ModelAttribute("number") Number number) {
+        numberService.update(number);
+        // redirect nukreipia vartotoja i iraso atvaizdavimo puslapi (getById)
+        return "redirect:/show?id=" + number.getId();
+
+    }
 
 
 }
