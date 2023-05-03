@@ -134,7 +134,7 @@ public class CalculatorController {
     @RequestMapping(method = RequestMethod.GET, value = "/numbers")
     public String getAllNumbers(Model model) {
         model.addAttribute("numbers", numberService.getall());
-        return "numbers";
+        return "numbers"; //05.02 turi atitikti numbers.jsp
 
     }
 
@@ -142,7 +142,7 @@ public class CalculatorController {
     @RequestMapping(method = RequestMethod.GET, value = "/show{id}")
     public String getById(@RequestParam("id") int id, Model model) {
         model.addAttribute("number", numberService.getById(id));
-        return "number";
+        return "number"; //05.02 turi atitikti number.jsp
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/delete{id}")
@@ -155,14 +155,14 @@ public class CalculatorController {
     // 04.27 atnaujinant irasa pirmiausia reikia ji parodyti i atskira forma tada gales tik redaguoti, sukuriam  "/updateNumber"
     @RequestMapping(method = RequestMethod.GET, value = "/update{id}")
     public String updateById(@RequestParam("id") int id, Model model) {
-        numberService.delete(id);
+        // 05.02 kai uzkrauneme iraso redagavimo forma, privalome jos laukelius uzpildyti iraso informacija
         model.addAttribute("number", numberService.getById(id));
         return "update";
     }
 
     // 04.27 kadangi forma naudoja metoda POST, cia irgi nurodome POST
     @RequestMapping(method = RequestMethod.POST, value = "/updateNumber")
-    public String updateNumber(@ModelAttribute("number") Number number) {
+    public String updateNumber(@ModelAttribute("number") Number number) { // 05.02 "number" jungia bekenda su front endu
         numberService.update(number);
         // redirect nukreipia vartotoja i iraso atvaizdavimo puslapi (getById)
         return "redirect:/show?id=" + number.getId();

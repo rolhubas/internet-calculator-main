@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Error</title>
+        <jsp:include page="header.jsp"/>
     </head>
     <body>
         <h4>Dalyba iš 0 negalima  </h4>
